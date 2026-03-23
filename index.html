@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST PAGE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .logo-font { font-family: 'Space Grotesk', sans-serif; }
+        @media (max-width: 640px) {
+            .desktop-table { display: none !important; }
+            .mobile-card { display: block !important; }
+        }
+        .mobile-card { display: none; }
+        #errorMessage { transition: opacity 0.4s ease; }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-200 min-h-screen">
+
+    <div id="loginModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+        <div class="bg-zinc-900 p-6 sm:p-8 rounded-3xl border border-zinc-700 w-full max-w-sm sm:max-w-md mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl sm:text-3xl font-semibold logo-font">Admin Login</h2>
+                <button onclick="hideLoginModal()" class="text-3xl text-zinc-400 hover:text-white">×</button>
+            </div>
+            <div class="space-y-5">
+                <div>
+                    <label class="block text-sm text-zinc-400 mb-2">Username</label>
+                    <input id="loginUsername" type="text" value="admin" class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:border-yellow-400 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm text-zinc-400 mb-2">Password</label>
+                    <input id="loginPassword" type="password" class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:border-yellow-400 outline-none" oninput="hideError()">
+                    <p id="errorMessage" class="text-red-400 text-sm mt-2 hidden">Incorrect credentials</p>
+                </div>
+                <button onclick="attemptLogin()" class="w-full bg-yellow-400 hover:bg-yellow-300 text-zinc-950 font-semibold py-4 rounded-3xl">Login</button>
+            </div>
+            <p class="text-center text-xs text-zinc-500 mt-6">Username: <strong>admin</strong> • Password: <strong>malad123</strong></p>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto p-4 sm:p-6">
+        <div class="flex justify-between items-center mb-8">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-hand-holding-dollar text-zinc-950 text-3xl"></i>
+                </div>
+                <div>
+                    <h1 class="logo-font text-4xl font-semibold tracking-tighter">TEST<span class="text-yellow-400">.</span></h1>
+                    <p class="text-zinc-400">TESTNAME</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <button id="loginBtn" onclick="showLoginModal()" class="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 px-5 py-2.5 rounded-3xl text-yellow-400">
+                    <i class="fa-solid fa-right-to-bracket"></i> Admin Login
+                </button>
+                <button id="logoutBtn" onclick="logout()" class="hidden flex items-center gap-2 bg-red-500/20 text-red-400 px-5 py-2.5 rounded-3xl">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 mb-6">
+            <input id="searchInput" type="text" placeholder="Search anything..." oninput="filterTable()" 
+                   class="flex-1 bg-zinc-900 border border-zinc-700 focus:border-yellow-400 rounded-3xl px-6 py-4 outline-none">
+            <button id="addBtn" onclick="showAddModal()" class="hidden items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-zinc-950 font-semibold px-6 py-4 rounded-
